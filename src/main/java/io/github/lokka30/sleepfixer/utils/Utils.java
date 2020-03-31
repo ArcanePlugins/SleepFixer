@@ -17,7 +17,7 @@ public class Utils {
 
     public void log(final LogLevel level, String msg) {
         final Logger logger = Bukkit.getLogger();
-        msg = colorize("&7" + msg);
+        msg = colorize("&8[&7SleepFixer&8] &7" + msg);
 
         switch (level) {
             case INFO:
