@@ -1,0 +1,15 @@
+name: SleepFixer
+version: ${project.version}
+description: ${project.description}
+api-version: '1.15'
+authors:
+  - 'lokka30 (author)'
+  - 'bStats Team (bStats Lib)'
+
+main: io.github.lokka30.sleepfixer.SleepFixer
+website: 'spigotmc.org'
+
+commands:
+  sleepfixer:
+    description: View plugin information and credits.
+    usage: /<command>
