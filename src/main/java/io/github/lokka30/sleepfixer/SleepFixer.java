@@ -25,21 +25,23 @@ public class SleepFixer extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        utils.log(LogLevel.INFO, "--- [Enabling Began] ---");
+        utils.log(LogLevel.INFO, "&8+----+&f (Enabling Began) &8+----+");
+        long startTime = System.currentTimeMillis();
 
-        utils.log(LogLevel.INFO, "Checking compatibility...");
+        utils.log(LogLevel.INFO, "&8(&3Startup &8- &31&8/&33&8) &7Checking compatibility...");
         if (checkCompatibility()) {
 
-            utils.log(LogLevel.INFO, "Registering events...");
+            utils.log(LogLevel.INFO, "&8(&3Startup &8- &32&8/&33&8) &7Registering events...");
             registerEvents();
 
-            utils.log(LogLevel.INFO, "Registering commands...");
+            utils.log(LogLevel.INFO, "&8(&3Startup &8- &33&8/&33&8) &7Registering commands...");
             registerCommands();
 
-            utils.log(LogLevel.INFO, "--- [Enabling Complete] ---");
-        } else {
-            utils.log(LogLevel.INFO, "--- [Enabling Cancelled] ---");
+            long duration = System.currentTimeMillis() - startTime;
 
+            utils.log(LogLevel.INFO, "&8+----+&f (Enabling Complete, took &b" + duration + "ms&f) &8+----+");
+        } else {
+            utils.log(LogLevel.INFO, "&8+----+&f (Enabling Cancelled) &8+----+");
             pluginManager.disablePlugin(this);
         }
     }
@@ -61,14 +63,18 @@ public class SleepFixer extends JavaPlugin {
 
         //Check server version (possible incompatibility)
         final String currentServerVersion = getServer().getVersion();
-        final String getRecommendedServerVersion = utils.getRecommendedServerVersion();
-        if (currentServerVersion.contains(getRecommendedServerVersion)) {
-            utils.log(LogLevel.INFO, "&7Compatibility Check: You are running a recommended server version.");
-        } else {
-            utils.log(LogLevel.WARNING, "&7Compatibility Check: You are not running a recommended server version! You will not receive support from the author doing so.");
+        boolean isRunningSupportedVersion = false;
+        for(String supportedVersion : utils.getSupportedServerVersions()) {
+            if(currentServerVersion.contains(supportedVersion)) {
+                isRunningSupportedVersion = true;
+                break;
+            }
+        }
+        if(!isRunningSupportedVersion) {
+            utils.log(LogLevel.WARNING, "&8(&3Compatibility Check&8)&7 Your server version '&b" + currentServerVersion + "&7' is not supported by this version of SleepFixer. You will not receive the author's support whilst running this unsupported server configuration.");
         }
 
-        //No dependencies, so checkCompatibility will always return true.
+        //No hard dependencies, so checkCompatibility will always return true.
         return true;
     }
 

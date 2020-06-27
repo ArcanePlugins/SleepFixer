@@ -3,13 +3,13 @@ package io.github.lokka30.sleepfixer.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class Utils {
 
-    public String getRecommendedServerVersion() {
-        return "1.15";
-    }
+    public List<String> getSupportedServerVersions() { return Arrays.asList("1.16", "1.15", "1.14", "1.13", "1.12", "1.11", "1.10", "1.9", "1.8", "1.7"); }
 
     public String colorize(final String msg) {
         return ChatColor.translateAlternateColorCodes('&', msg);
@@ -17,7 +17,7 @@ public class Utils {
 
     public void log(final LogLevel level, String msg) {
         final Logger logger = Bukkit.getLogger();
-        msg = colorize("&8[&7SleepFixer&8] &7" + msg);
+        msg = colorize("&b&lSleepFixer: &7" + msg);
 
         switch (level) {
             case INFO:

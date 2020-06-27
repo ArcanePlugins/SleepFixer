@@ -15,10 +15,15 @@ public class SleepFixerCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
-        sender.sendMessage(instance.utils.colorize("&a&lSleepFixer: &7This server is running &aSleepFixer v" + instance.getDescription().getVersion() + "&7, developed for &aMinecraft " + instance.utils.getRecommendedServerVersion() + "&7."));
-        sender.sendMessage(instance.utils.colorize("&a&lSleepFixer: &7Credits:"));
-        for (String contributor : instance.getDescription().getAuthors()) {
-            sender.sendMessage(instance.utils.colorize("&8 - &7" + contributor));
+        if(args.length == 0) {
+            sender.sendMessage(" ");
+            sender.sendMessage(instance.utils.colorize("&b&lSleepFixer &bv" + instance.getDescription().getVersion() + "&7 by &3&olokka30&7."));
+            sender.sendMessage(" ");
+            sender.sendMessage(instance.utils.colorize("&f&nSpigotMC Resource Page:"));
+            sender.sendMessage(instance.utils.colorize("&8https://www.spigotmc.org/resources/%E2%99%A6-sleepfixer-%E2%99%A6-1-7-10-1-15-2.76746/"));
+            sender.sendMessage(" ");
+        } else {
+            sender.sendMessage(instance.utils.colorize("&b&lSleepFixer: &7Usage: &b/" + label));
         }
         return true;
     }
