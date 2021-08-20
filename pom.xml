@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2020-2021 lokka30, All Rights Reserved.
+  ~
+  ~ SleepFixer: The go-to simple and robust one-player-sleep plugin for SpigotMC servers.
+  ~   Description and download: <https://www.spigotmc.org/resources/sleepfixer.76746/>
+  ~   Source code and documentation: <https://github.com/lokka30/SleepFixer>
+  ~
+  ~ Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the repository's LICENSE.md file.
+  -->
+
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.lokka30</groupId>
+    <groupId>me.lokka30</groupId>
     <artifactId>SleepFixer</artifactId>
-    <version>1.2-RELEASE</version>
+    <version>2.0.0</version>
 
     <name>SleepFixer</name>
-    <description>Only one player will need to sleep to make it day.</description>
+    <description>The go-to simple and robust one-player-sleep plugin for SpigotMC servers.</description>
 
     <packaging>jar</packaging>
     <properties>
@@ -23,7 +33,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -32,12 +42,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.4</version>
                 <configuration>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>io.github.lokka30.sleepfixer.bstats</shadedPattern>
+                            <shadedPattern>${project.groupId}.bstats</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>me.lokka30.microlib</pattern>
+                            <shadedPattern>${project.groupId}.microlib</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -68,10 +82,6 @@
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
         <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-        <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
@@ -85,14 +95,19 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
+            <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>1.7</version>
+            <version>2.2.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.lokka30</groupId>
+            <artifactId>MicroLib</artifactId>
+            <version>3.0.1</version>
         </dependency>
     </dependencies>
 </project>

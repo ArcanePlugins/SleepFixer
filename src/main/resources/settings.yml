@@ -1,0 +1,23 @@
+# SleepFixer | The go-to simple and robust one-player-sleep plugin for SpigotMC servers.
+
+# The following section contains options that adjust what things
+# SleepFixer does when a player sleeps in a bed.
+on-sleep:
+
+  # In the player's world, should the weather be cleared?
+  clear-weather: true
+
+  # Remove every player's 'time since last slept'? (aka 'phantom spawn timer')
+  # This only applies to players in the same world as the player who slept.
+  # This setting has no effect on servers older than MC 1.9.
+  clear-insomnia: true
+
+# Can be adjusted to spam a lot of information in your console.
+# In the rare case there is a bug with the plugin, this can be
+# used to help find the cause.
+debug: [ ]
+
+# Do not change anything here.
+file:
+  version: 1
+  generated-with: '${project.version}'
