@@ -13,6 +13,7 @@ package me.lokka30.sleepfixer.listeners;
 import me.lokka30.microlib.other.VersionUtils;
 import me.lokka30.sleepfixer.SleepFixer;
 import org.bukkit.Statistic;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -41,6 +42,8 @@ public class BedEnterListener implements Listener {
         if (!event.getBedEnterResult().equals(PlayerBedEnterEvent.BedEnterResult.OK)) return;
 
         final Player player = event.getPlayer();
+
+        if(player.getWorld().getEnvironment() != World.Environment.NORMAL) return;
 
         // Clear weather in the world.
         if (main.settings.getConfig().getBoolean("on-sleep.clear-weather", true)) {

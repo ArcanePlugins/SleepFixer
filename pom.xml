@@ -16,7 +16,7 @@
 
     <groupId>me.lokka30</groupId>
     <artifactId>SleepFixer</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 
     <name>SleepFixer</name>
     <description>The go-to simple and robust one-player-sleep plugin for SpigotMC servers.</description>
