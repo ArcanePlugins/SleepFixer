@@ -1,20 +1,17 @@
 /*
- * Copyright (c) 2020-2021 lokka30, All Rights Reserved.
- *
- * SleepFixer: The go-to simple and robust one-player-sleep plugin for SpigotMC servers.
- *   Description and download: <https://www.spigotmc.org/resources/sleepfixer.76746/>
- *   Source code and documentation: <https://github.com/lokka30/SleepFixer>
- *
- * Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the repository's LICENSE.md file.
+ * Copyright (c) 2020-2022 lokka30, All Rights Reserved.
+ * This file is/was part of the SleepFixer resource, licensed under GNU AGPL v3.
+ * For more information, see <https://github.com/lokka30/SleepFixer>.
  */
 
 package me.lokka30.sleepfixer;
 
 import me.lokka30.microlib.files.YamlConfigFile;
 import me.lokka30.microlib.maths.QuickTimer;
-import me.lokka30.sleepfixer.listeners.BedEnterListener;
-import me.lokka30.sleepfixer.listeners.JoinListener;
-import me.lokka30.sleepfixer.misc.Utils;
+import me.lokka30.sleepfixer.listener.BedEnterListener;
+import me.lokka30.sleepfixer.listener.JoinListener;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,42 +28,57 @@ public class SleepFixer extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Utils.LOGGER.info("&fInitiating start-up sequence...");
         final QuickTimer timer = new QuickTimer();
 
-        Utils.LOGGER.info("Loading files...");
         loadFiles();
-
-        Utils.LOGGER.info("Registering listeners...");
         registerListeners();
 
-        Utils.LOGGER.info("&fStart-up complete, took &b" + timer.getTimer() + "ms&7.");
+        getLogger().info("Running misc procedures...");
+        loadMetrics();
+
+        getLogger().info("Start-up complete (took " + timer.getTimer() + "ms).");
     }
 
     @Override
     public void onDisable() {
-        Utils.LOGGER.info("&fInitiating shut-down sequence...");
         final QuickTimer timer = new QuickTimer();
 
         // If any shut-down things need to be added, put them here.
 
-        Utils.LOGGER.info("&fShut-down complete, took &b" + timer.getTimer() + "ms&7.");
+        getLogger().info("Shut-down complete (took " + timer.getTimer() + "ms).");
     }
 
-    void loadFiles() {
+    private void loadFiles() {
+        getLogger().info("Loading files...");
+
         // Save & load settings.yml
         try {
             settings.load();
         } catch (IOException ex) {
-            Utils.LOGGER.error("Unable to load &bsettings.yml&7! &8" + ex.getMessage());
+            getLogger().severe("Unable to load settings.yml: " + ex.getMessage());
         }
-
-        // Replace & save license.txt
-        saveResource("license.txt", true);
     }
 
-    public void registerListeners() {
+    private void registerListeners() {
+        getLogger().info("Registering listeners...");
+
         Bukkit.getPluginManager().registerEvents(new BedEnterListener(this), this);
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
+    }
+
+    private void loadMetrics() {
+        final Metrics metrics = new Metrics(this, 6935);
+
+        // This chart displays how many servers use the 'clear weather on sleep' setting
+        metrics.addCustomChart(new SimplePie("clears_weather_on_sleep", () ->
+                Boolean.toString(settings.getConfig().getBoolean("on-sleep.clear-weather", true))));
+
+        // This chart displays how many servers use the 'clear insomnia on sleep' setting
+        metrics.addCustomChart(new SimplePie("clears_insomnia_on_sleep", () ->
+                Boolean.toString(settings.getConfig().getBoolean("on-sleep.clear-insomnia", true))));
+
+        // This chart displays how many servers use the debug setting, and how many
+        metrics.addCustomChart(new SimplePie("debug_categories_enabled", () ->
+                Integer.toString(settings.getConfig().getStringList("debug").size())));
     }
 }

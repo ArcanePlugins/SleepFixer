@@ -1,4 +1,8 @@
-# IntelliJ files.
-/.idea
-SleepFixer.iml
-/target/
+# IntelliJ IDEA
+.idea/
+*.iml
+target/
+
+# macOS
+._.git
+.DS_Store

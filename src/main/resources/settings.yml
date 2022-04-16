@@ -15,7 +15,7 @@ on-sleep:
 # Can be adjusted to spam a lot of information in your console.
 # In the rare case there is a bug with the plugin, this can be
 # used to help find the cause.
-debug: [ ]
+debug: []
 
 # Do not change anything here.
 file:

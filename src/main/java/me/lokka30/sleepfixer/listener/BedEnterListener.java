@@ -1,16 +1,11 @@
 /*
- * Copyright (c) 2020-2021 lokka30, All Rights Reserved.
- *
- * SleepFixer: The go-to simple and robust one-player-sleep plugin for SpigotMC servers.
- *   Description and download: <https://www.spigotmc.org/resources/sleepfixer.76746/>
- *   Source code and documentation: <https://github.com/lokka30/SleepFixer>
- *
- * Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the repository's LICENSE.md file.
+ * Copyright (c) 2020-2022 lokka30, All Rights Reserved.
+ * This file is/was part of the SleepFixer resource, licensed under GNU AGPL v3.
+ * For more information, see <https://github.com/lokka30/SleepFixer>.
  */
 
-package me.lokka30.sleepfixer.listeners;
+package me.lokka30.sleepfixer.listener;
 
-import me.lokka30.microlib.other.VersionUtils;
 import me.lokka30.sleepfixer.SleepFixer;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
@@ -26,7 +21,6 @@ import org.bukkit.event.player.PlayerBedEnterEvent;
 public class BedEnterListener implements Listener {
 
     private final SleepFixer main;
-
     public BedEnterListener(SleepFixer main) {
         this.main = main;
     }
@@ -51,11 +45,16 @@ public class BedEnterListener implements Listener {
         // Clear insomnia for all players in the world.
         if (main.settings.getConfig().getBoolean("on-sleep.clear-insomnia", true)) {
 
-            // Server must be MC 1.9 or newer
-            if (!VersionUtils.isOneNine()) return;
+            // Only 1.9+ servers have the insomnia statistic for the Phantom entities
+            try {
+                Statistic.valueOf("TIME_SINCE_REST");
 
-            // Reset sleep statistic for all players in the same world.
-            player.getWorld().getPlayers().forEach(onlinePlayer -> onlinePlayer.setStatistic(Statistic.TIME_SINCE_REST, 0));
+                // ok, it exists, let's continue
+
+                // Reset sleep statistic for all players in the same world.
+                player.getWorld().getPlayers().forEach(onlinePlayer -> onlinePlayer.setStatistic(Statistic.TIME_SINCE_REST, 0));
+
+            } catch(IllegalArgumentException ignored) {}
         }
     }
 }

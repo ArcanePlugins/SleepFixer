@@ -1,14 +1,10 @@
 /*
- * Copyright (c) 2020-2021 lokka30, All Rights Reserved.
- *
- * SleepFixer: The go-to simple and robust one-player-sleep plugin for SpigotMC servers.
- *   Description and download: <https://www.spigotmc.org/resources/sleepfixer.76746/>
- *   Source code and documentation: <https://github.com/lokka30/SleepFixer>
- *
- * Use of this source code is governed by the GNU AGPL v3.0 license that can be found in the repository's LICENSE.md file.
+ * Copyright (c) 2020-2022 lokka30, All Rights Reserved.
+ * This file is/was part of the SleepFixer resource, licensed under GNU AGPL v3.
+ * For more information, see <https://github.com/lokka30/SleepFixer>.
  */
 
-package me.lokka30.sleepfixer.listeners;
+package me.lokka30.sleepfixer.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

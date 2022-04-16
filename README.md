@@ -7,7 +7,7 @@
 # Description & download
 
 * The [SleepFixer Resource Page on SpigotMC](https://www.spigotmc.org/resources/sleepfixer.76746/) describes in further
-  detail what SleepFixer does, and it also provides download links.
+detail what SleepFixer does, and it also provides download links.
 
 # SleepFixer Wiki
 
@@ -16,7 +16,7 @@
 # Contributions
 
 * Contributions are very much welcome.
-* Prior to working on a pull request, please contact me to ensure I will accept it in the first place.
+* Prior to working on a pull request, please create an issue to see if the PR is likely to be accepted.
 * See the [Contributing](https://github.com/lokka30/SleepFixer/wiki/Contributing) Wiki page.
 
 # Branches
@@ -26,5 +26,17 @@
 
 # License
 
-* This project is licensed under GNU AGPL v3.0 -
-  see [LICENSE.md](https://github.com/lokka30/SleepFixer/blob/master/LICENSE.md).
+        Copyright (C) 2020-2022  lokka30
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU Affero General Public License as
+        published by the Free Software Foundation, either version 3 of the
+        License, or (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU Affero General Public License for more details.
+
+        You should have received a copy of the GNU Affero General Public License
+        along with this program.  If not, see <https://www.gnu.org/licenses/>.

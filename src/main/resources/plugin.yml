@@ -3,6 +3,6 @@ version: '${project.version}'
 description: '${project.description}'
 authors: [ 'lokka30' ]
 website: 'https://github.com/lokka30/SleepFixer'
-
-main: me.lokka30.sleepfixer.SleepFixer
+load: 'STARTUP'
+main: 'me.lokka30.sleepfixer.SleepFixer'
 api-version: '1.13' # Yes, this is intentionally set to the older version, '1.13'.
