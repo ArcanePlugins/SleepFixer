@@ -26,7 +26,7 @@ detail what SleepFixer does, and it also provides download links.
 
 # License
 
-        Copyright (C) 2020-2022  lokka30
+        Copyright (C) 2020-2023  lokka30
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU Affero General Public License as

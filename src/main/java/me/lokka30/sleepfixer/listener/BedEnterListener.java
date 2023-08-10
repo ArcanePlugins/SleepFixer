@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author lokka30
@@ -22,7 +23,9 @@ import org.bukkit.event.player.PlayerBedEnterEvent;
 public class BedEnterListener implements Listener {
 
     private final SleepFixer main;
-    public BedEnterListener(SleepFixer main) {
+    public BedEnterListener(
+        final @NotNull SleepFixer main
+    ) {
         this.main = main;
     }
 
@@ -32,13 +35,17 @@ public class BedEnterListener implements Listener {
      * @since v1.0.0
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
-    public void onBedEnter(final PlayerBedEnterEvent event) {
-        if (!event.getBedEnterResult().equals(PlayerBedEnterEvent.BedEnterResult.OK)) return;
+    public void onBedEnter(
+        final PlayerBedEnterEvent event
+    ) {
+        if (!event.getBedEnterResult().equals(PlayerBedEnterEvent.BedEnterResult.OK))
+            return;
 
         final Player player = event.getPlayer();
 
         // Only apply these changes in the overworld (Environment.NORMAL)
-        if(player.getWorld().getEnvironment() != World.Environment.NORMAL) return;
+        if(player.getWorld().getEnvironment() != World.Environment.NORMAL)
+            return;
 
         // Clear weather in the world.
         if (main.settings.getConfig().getBoolean("on-sleep.clear-weather", true)) {
@@ -56,7 +63,9 @@ public class BedEnterListener implements Listener {
                 // ok, it exists, let's continue
 
                 // Reset sleep statistic for all players in the same world.
-                player.getWorld().getPlayers().forEach(onlinePlayer -> onlinePlayer.setStatistic(Statistic.TIME_SINCE_REST, 0));
+                player.getWorld().getPlayers().forEach(onlinePlayer ->
+                    onlinePlayer.setStatistic(Statistic.TIME_SINCE_REST, 0)
+                );
 
             } catch(IllegalArgumentException ignored) {}
         }

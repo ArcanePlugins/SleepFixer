@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 lokka30, All Rights Reserved.
+ * Copyright (c) 2020-2023 lokka30, All Rights Reserved.
  * This file is/was part of the SleepFixer resource, licensed under GNU AGPL v3.
  * For more information, see <https://github.com/lokka30/SleepFixer>.
  */
@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lokka30
@@ -24,11 +25,14 @@ import java.io.IOException;
  */
 public class SleepFixer extends JavaPlugin {
 
-    public final YamlConfigFile settings = new YamlConfigFile(this, new File(getDataFolder(), "settings.yml"));
+    public final YamlConfigFile settings = new YamlConfigFile(
+        this,
+        new File(getDataFolder(), "settings.yml")
+    );
 
     @Override
     public void onEnable() {
-        final QuickTimer timer = new QuickTimer();
+        final QuickTimer timer = new QuickTimer(TimeUnit.MILLISECONDS);
 
         loadFiles();
         registerListeners();
@@ -36,16 +40,16 @@ public class SleepFixer extends JavaPlugin {
         getLogger().info("Running misc procedures...");
         loadMetrics();
 
-        getLogger().info("Start-up complete (took " + timer.getTimer() + "ms).");
+        getLogger().info("Start-up complete (took " + timer.getDuration() + "ms).");
     }
 
     @Override
     public void onDisable() {
-        final QuickTimer timer = new QuickTimer();
+        final QuickTimer timer = new QuickTimer(TimeUnit.MILLISECONDS);
 
         // If any shut-down things need to be added, put them here.
 
-        getLogger().info("Shut-down complete (took " + timer.getTimer() + "ms).");
+        getLogger().info("Shut-down complete (took " + timer.getDuration() + "ms).");
     }
 
     private void loadFiles() {
@@ -55,7 +59,8 @@ public class SleepFixer extends JavaPlugin {
         try {
             settings.load();
         } catch (IOException ex) {
-            getLogger().severe("Unable to load settings.yml: " + ex.getMessage());
+            getLogger().severe("Unable to load settings.yml: " + ex.getMessage() + "; Stack trace:");
+            ex.printStackTrace();
         }
     }
 

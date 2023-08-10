@@ -23,7 +23,9 @@ public class JoinListener implements Listener {
      * @since v1.0.0
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
-    public void onJoin(final PlayerJoinEvent event) {
+    public void onJoin(
+        final PlayerJoinEvent event
+    ) {
         event.getPlayer().setSleepingIgnored(true);
     }
 }
