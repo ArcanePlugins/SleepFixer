@@ -27,7 +27,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -40,7 +39,7 @@ public class BedEnterListener implements Listener {
     private final SleepFixer plugin;
 
     public BedEnterListener(
-            final @NotNull SleepFixer plugin
+            final SleepFixer plugin
     ) {
         this.plugin = Objects.requireNonNull(plugin, "plugin");
     }
