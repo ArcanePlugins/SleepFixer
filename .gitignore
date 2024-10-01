@@ -1,8 +1,15 @@
 # IntelliJ IDEA
 .idea/
 *.iml
+
+# Maven
 target/
 
 # macOS
 ._.git
 .DS_Store
+Thumbs.db
+
+# Local Testing
+/local/
+/testing/

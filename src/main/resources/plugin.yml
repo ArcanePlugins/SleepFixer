@@ -4,5 +4,8 @@ description: '${project.description}'
 authors: [ 'lokka30' ]
 website: 'https://github.com/lokka30/SleepFixer'
 load: 'STARTUP'
-main: 'me.lokka30.sleepfixer.SleepFixer'
-api-version: '1.13' # Yes, this is intentionally set to the older version, '1.13'.
+main: 'io.github.arcaneplugins.sleepfixer.SleepFixer'
+api-version: '1.13'
+# Yes, api-version is intentionally set to the older version, '1.13'.
+# It suppresses the 'legacy' warning whilst still working on all MC versions
+# that the plugin intends to support (1.7+ as of writing).
